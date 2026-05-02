@@ -17,7 +17,7 @@ Travel website built by using web development basics to explore destination, bud
 ## Tech Used
 - HTML
 - CSS
-- JavaScript (if used)
+- JavaScript
 
 ## About
 This project was built as part of my learning in web development. It helped me understand how to design interactive features like cost calculation and user input handling, along with structuring a complete website.
