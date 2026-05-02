@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incredible India - Complete Travel Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #FF9933;
+            --secondary: #138808;
+            --accent: #000080;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo span:nth-child(2) {
+            color: white;
+        }
+
+        .logo span:nth-child(3) {
+            color: var(--secondary);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .search-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #e68a00;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Destinations Section */
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .destination-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .location {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .expense {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .budget {
+            color: var(--secondary);
+        }
+
+        .mid-range {
+            color: orange;
+        }
+
+        .luxury {
+            color: red;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #e68a00;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light);
+            padding: 4rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: var(--accent);
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Travel Guide Section */
+        .travel-guide {
+            background: var(--light);
+            padding: 4rem 0;
+        }
+
+        .guide-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 0 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .guide-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .guide-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-card h3 i {
+            color: var(--primary);
+        }
+
+        /* Budget Calculator */
+        .budget-calculator {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .calculator-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .result-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+
+        .result-breakdown {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #e68a00;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Modal for detailed view */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-img {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .search-container {
+                width: 90%;
+            }
+
+            .expense {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .calculator-form {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input, .newsletter-form button {
+                width: 100%;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <span>Incredible</span><span>India</span>
+        </div>
+        <p class="tagline">Discover the land of diversity, culture, and breathtaking landscapes</p>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search destinations, experiences, hotels...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span>Incredible</span><span>India</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#travel-guide">Travel Guide</a></li>
+                <li><a href="#budget-calculator">Budget Calculator</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Destinations Section -->
+    <section class="container" id="destinations">
+        <h2 class="section-title">Popular Destinations</h2>
+        <div class="destinations">
+            <!-- Destination 1 -->
+            <div class="destination-card" data-destination="taj-mahal">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Taj Mahal">
+                </div>
+                <div class="card-content">
+                    <h3>Taj Mahal</h3>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Agra, Uttar Pradesh</span>
+                    </div>
+                    <p class="description">The iconic white marble mausoleum, a symbol of eternal love and one of the Seven Wonders of the World.</p>
+                    <div class="expense">
+                        <span class="budget">Budget: ₹5,000</span>
+                        <span class="mid-range">Mid: ₹15,000</span>
+                        <span class="luxury">Luxury: ₹30,000+</span>
+                    </div>
+                    <a href="#" class="btn view-details">Explore More</a>
+                </div>
+            </div>
+
+            <!-- Destination 2 -->
+            <div class="destination-card" data-destination="goa">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1588418073148-93dbe39bc504?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Goa Beaches">
+                </div>
+                <div class="card-content">
+                    <h3>Goa Beaches</h3>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Goa</span>
+                    </div>
+                    <p class="description">Sun-kissed beaches, vibrant nightlife, Portuguese heritage, and delicious seafood await in India's party capital.</p>
+                    <div class="expense">
+                        <span class="budget">Budget: ₹8,000</span>
+                        <span class="mid-range">Mid: ₹20,000</span>
+                        <span class="luxury">Luxury: ₹40,000+</span>
+                    </div>
+                    <a href="#" class="btn view-details">Explore More</a>
+                </div>
+            </div>
+
+            <!-- Destination 3 -->
+            <div class="destination-card" data-destination="kerala">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1558642084-fd07fae5282e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kerala Backwaters">
+                </div>
+                <div class="card-content">
+                    <h3>Kerala Backwaters</h3>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kerala</span>
+                    </div>
+                    <p class="description">A network of tranquil canals, lakes, and lagoons where you can experience serene houseboat cruises.</p>
+                    <div class="expense">
+                        <span class="budget">Budget: ₹7,000</span>
+                        <span class="mid-range">Mid: ₹18,000</span>
+                        <span class="luxury">Luxury: ₹35,000+</span>
+                    </div>
+                    <a href="#" class="btn view-details">Explore More</a>
+                </div>
+            </div>
+
+            <!-- Destination 4 -->
+            <div class="destination-card" data-destination="jaipur">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Jaipur">
+                </div>
+                <div class="card-content">
+                    <h3>Jaipur</h3>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Rajasthan</span>
+                    </div>
+                    <p class="description">The Pink City known for its magnificent palaces, forts, and vibrant markets in the heart of Rajasthan.</p>
+                    <div class="expense">
+                        <span class="budget">Budget: ₹6,000</span>
+                        <span class="mid-range">Mid: ₹16,000</span>
+                        <span class="luxury">Luxury: ₹32,000+</span>
+                    </div>
+                    <a href="#" class="btn view-details">Explore More</a>
+                </div>
+            </div>
+
+            <!-- Destination 5 -->
+            <div class="destination-card" data-destination="varanasi">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1587132137056-23c8b17a9f33?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Varanasi">
+                </div>
+                <div class="card-content">
+                    <h3>Varanasi</h3>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Uttar Pradesh</span>
+                    </div>
+                    <p class="description">The spiritual capital of India, famous for its ghats along the Ganges River and ancient temples.</p>
+                    <div class="expense">
+                        <span class="budget">Budget: ₹4,000</span>
+                        <span class="mid-range">Mid: ₹12,000</span>
+                        <span class="luxury">Luxury: ₹25,000+</span>
+                    </div>
+                    <a href="#" class="btn view-details">Explore More</a>
+                </div>
+            </div>
+
+            <!-- Destination 6 -->
+            <div class="destination-card" data-destination="ladakh">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1598255526745-41cef89b8e7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ladakh">
+                </div>
+                <div class="card-content">
+                    <h3>Ladakh</h3>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jammu & Kashmir</span>
+                    </div>
+                    <p class="description">A high-altitude desert with breathtaking landscapes, Buddhist monasteries, and adventure activities.</p>
+                    <div class="expense">
+                        <span class="budget">Budget: ₹10,000</span>
+                        <span class="mid-range">Mid: ₹25,000</span>
+                        <span class="luxury">Luxury: ₹50,000+</span>
+                    </div>
+                    <a href="#" class="btn view-details">Explore More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Travel With Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Expert Guides</h3>
+                    <p>Our local guides have extensive knowledge about destinations and hidden gems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Best Prices</h3>
+                    <p>We offer competitive prices without compromising on quality and experiences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safe & Secure</h3>
+                    <p>Your safety is our priority with verified accommodations and transport.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support to assist you during your travels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Travelers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The Golden Triangle tour was incredible! Our guide made history come alive at every monument. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>USA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Kerala's backwaters were even more beautiful than in pictures. The houseboat experience was the highlight of our trip!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="David Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>David Chen</h4>
+                            <p>Australia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"We had an amazing time in Rajasthan. The cultural experiences, food, and hospitality were beyond our expectations."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Spain</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Guide Section -->
+    <section class="travel-guide" id="travel-guide">
+        <div class="container">
+            <h2 class="section-title">India Travel Guide</h2>
+            <div class="guide-tabs">
+                <button class="tab-btn active" data-tab="visa">Visa & Entry</button>
+                <button class="tab-btn" data-tab="transport">Transport</button>
+                <button class="tab-btn" data-tab="accommodation">Accommodation</button>
+                <button class="tab-btn" data-tab="food">Food & Cuisine</button>
+                <button class="tab-btn" data-tab="culture">Culture & Etiquette</button>
+            </div>
+
+            <div class="tab-content active" id="visa-content">
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3><i class="fas fa-passport"></i> Visa Requirements</h3>
+                        <p>Most foreign nationals need a visa to enter India. Tourist e-Visas are available for citizens of 169 countries, valid for 30 days, 1 year, or 5 years.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-plane"></i> International Airports</h3>
+                        <p>Major international airports include Delhi, Mumbai, Bengaluru, Chennai, and Kolkata. Direct flights connect India to major cities worldwide.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-file-alt"></i> Required Documents</h3>
+                        <p>Valid passport with at least 6 months validity, visa, return ticket, and sufficient funds for your stay are required for entry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="transport-content">
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3><i class="fas fa-train"></i> Indian Railways</h3>
+                        <p>India has one of the world's largest rail networks. Book tickets in advance through IRCTC website or app for long-distance travel.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-bus"></i> Buses & Taxis</h3>
+                        <p>State-run and private buses connect cities. Use app-based taxis like Uber and Ola in metropolitan areas for convenient travel.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-plane-departure"></i> Domestic Flights</h3>
+                        <p>Multiple airlines operate domestic flights connecting major cities. Book in advance for better fares, especially during peak seasons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="accommodation-content">
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3><i class="fas fa-hotel"></i> Hotels</h3>
+                        <p>Wide range from budget hotels to luxury 5-star properties available in all major cities and tourist destinations.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-home"></i> Homestays</h3>
+                        <p>Experience Indian hospitality with homestays, especially popular in Kerala, Goa, and Himalayan regions.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-bed"></i> Heritage Properties</h3>
+                        <p>Stay in converted palaces, havelis, and forts for a unique experience, particularly in Rajasthan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="food-content">
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3><i class="fas fa-utensils"></i> Regional Cuisines</h3>
+                        <p>Each region has distinct culinary traditions - from rich Mughlai dishes in the north to coconut-based curries in the south.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-leaf"></i> Vegetarian Options</h3>
+                        <p>India offers extensive vegetarian cuisine due to cultural and religious practices. Many restaurants are purely vegetarian.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-pepper-hot"></i> Street Food</h3>
+                        <p>Experience diverse street food but choose vendors with high turnover and ensure food is freshly cooked and hot.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="culture-content">
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3><i class="fas fa-hands"></i> Greetings</h3>
+                        <p>Traditional greeting is "Namaste" with folded hands. Handshakes are common in business settings.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-monument"></i> Temple Etiquette</h3>
+                        <p>Remove shoes before entering temples. Dress modestly covering shoulders and knees. Some temples prohibit non-Hindus.</p>
+                    </div>
+                    <div class="guide-card">
+                        <h3><i class="fas fa-gift"></i> Gift Giving</h3>
+                        <p>Gifts are appreciated but not always opened in front of the giver. Avoid leather items as gifts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget Calculator -->
+    <section class="budget-calculator" id="budget-calculator">
+        <div class="container">
+            <h2 class="section-title">Travel Budget Calculator</h2>
+            <div class="calculator-container">
+                <form class="calculator-form" id="budget-form">
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <select id="destination" required>
+                            <option value="">Select Destination</option>
+                            <option value="taj-mahal">Taj Mahal, Agra</option>
+                            <option value="goa">Goa Beaches</option>
+                            <option value="kerala">Kerala Backwaters</option>
+                            <option value="jaipur">Jaipur, Rajasthan</option>
+                            <option value="varanasi">Varanasi</option>
+                            <option value="ladakh">Ladakh</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelers">Number of Travelers</label>
+                        <input type="number" id="travelers" min="1" max="10" value="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (Days)</label>
+                        <input type="number" id="duration" min="1" max="30" value="7" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget-type">Budget Type</label>
+                        <select id="budget-type" required>
+                            <option value="budget">Budget</option>
+                            <option value="mid-range" selected>Mid-Range</option>
+                            <option value="luxury">Luxury</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="accommodation">Accommodation Type</label>
+                        <select id="accommodation" required>
+                            <option value="budget">Budget Hotel/Hostel</option>
+                            <option value="mid-range" selected>Mid-Range Hotel</option>
+                            <option value="luxury">Luxury Hotel/Resort</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="meals">Meals per Day</label>
+                        <select id="meals" required>
+                            <option value="budget">Street Food/Basic Meals</option>
+                            <option value="mid-range" selected>Restaurant Dining</option>
+                            <option value="luxury">Fine Dining</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Calculate Budget</button>
+                    </div>
+                </form>
+
+                <div class="calculator-result" id="calculator-result">
+                    <h3>Estimated Trip Cost</h3>
+                    <div class="result-amount" id="result-amount">₹0</div>
+                    <p>This is an estimate for your selected preferences. Actual costs may vary.</p>
+                    <div class="result-breakdown" id="result-breakdown">
+                        <!-- Breakdown will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest travel tips, destination guides, and exclusive offers delivered to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Incredible India</h3>
+                <p>Your trusted partner for exploring the diverse and beautiful destinations across India.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#travel-guide">Travel Guide</a></li>
+                    <li><a href="#budget-calculator">Budget Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Popular Destinations</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Taj Mahal, Agra</a></li>
+                    <li><a href="#">Goa Beaches</a></li>
+                    <li><a href="#">Kerala Backwaters</a></li>
+                    <li><a href="#">Rajasthan Palaces</a></li>
+                    <li><a href="#">Himalayan Treks</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Travel Street, New Delhi</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-envelope"></i> info@incredibleindia.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Incredible India Travel Guide. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Destination Detail Modal -->
+    <div class="modal" id="destination-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modal-title">Destination Details</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-img">
+                    <img id="modal-image" src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <div class="location" id="modal-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span></span>
+                    </div>
+                    <p id="modal-description"></p>
+                    <div class="expense" id="modal-expense">
+                        <!-- Expense details will be inserted here -->
+                    </div>
+                    <h3>Best Time to Visit</h3>
+                    <p id="modal-best-time"></p>
+                    <h3>Top Attractions</h3>
+                    <ul id="modal-attractions">
+                        <!-- Attractions will be inserted here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Search Functionality
+        document.querySelector('.search-box button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-box input').value;
+            if (searchTerm.trim() !== '') {
+                alert(`Searching for: ${searchTerm}`);
+                // In a real application, you would redirect to search results or filter content
+            }
+        });
+
+        // Tab functionality for travel guide
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab') + '-content';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Budget Calculator
+        document.getElementById('budget-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const destination = document.getElementById('destination').value;
+            const travelers = parseInt(document.getElementById('travelers').value);
+            const duration = parseInt(document.getElementById('duration').value);
+            const budgetType = document.getElementById('budget-type').value;
+            const accommodation = document.getElementById('accommodation').value;
+            const meals = document.getElementById('meals').value;
+            
+            if (!destination) {
+                alert('Please select a destination');
+                return;
+            }
+            
+            // Base costs per day per person for different destinations
+            const baseCosts = {
+                'taj-mahal': { budget: 2000, mid: 5000, luxury: 10000 },
+                'goa': { budget: 2500, mid: 6000, luxury: 12000 },
+                'kerala': { budget: 2200, mid: 5500, luxury: 11000 },
+                'jaipur': { budget: 2100, mid: 5200, luxury: 10500 },
+                'varanasi': { budget: 1800, mid: 4500, luxury: 9000 },
+                'ladakh': { budget: 3000, mid: 7000, luxury: 14000 }
+            };
+            
+            // Multipliers for different budget types
+            const budgetMultipliers = {
+                'budget': 0.8,
+                'mid-range': 1,
+                'luxury': 1.8
+            };
+            
+            // Multipliers for accommodation types
+            const accommodationMultipliers = {
+                'budget': 0.7,
+                'mid-range': 1,
+                'luxury': 1.5
+            };
+            
+            // Multipliers for meal types
+            const mealMultipliers = {
+                'budget': 0.6,
+                'mid-range': 1,
+                'luxury': 1.4
+            };
+            
+            const baseCost = baseCosts[destination][budgetType];
+            const budgetMultiplier = budgetMultipliers[budgetType];
+            const accommodationMultiplier = accommodationMultipliers[accommodation];
+            const mealMultiplier = mealMultipliers[meals];
+            
+            // Calculate total cost
+            const totalCost = Math.round(baseCost * budgetMultiplier * accommodationMultiplier * mealMultiplier * duration * travelers);
+            
+            // Display result
+            document.getElementById('result-amount').textContent = `₹${totalCost.toLocaleString()}`;
+            
+            // Create breakdown
+            const breakdown = document.getElementById('result-breakdown');
+            breakdown.innerHTML = `
+                <h4>Cost Breakdown:</h4>
+                <p>Base Cost (${budgetType}): ₹${baseCost.toLocaleString()} per person per day</p>
+                <p>Accommodation (${accommodation}): ${(accommodationMultiplier * 100).toFixed(0)}% of base</p>
+                <p>Meals (${meals}): ${(mealMultiplier * 100).toFixed(0)}% of base</p>
+                <p>Duration: ${duration} days</p>
+                <p>Travelers: ${travelers} person(s)</p>
+            `;
+            
+            // Show result
+            document.getElementById('calculator-result').style.display = 'block';
+        });
+
+        // Destination details modal
+        const modal = document.getElementById('destination-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const viewDetailsBtns = document.querySelectorAll('.view-details');
+
+        // Destination data
+        const destinationData = {
+            'taj-mahal': {
+                title: 'Taj Mahal',
+                image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                location: 'Agra, Uttar Pradesh',
+                description: 'The Taj Mahal is an ivory-white marble mausoleum on the south bank of the Yamuna river in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal.',
+                budget: '₹5,000',
+                mid: '₹15,000',
+                luxury: '₹30,000+',
+                bestTime: 'October to March - Pleasant weather with temperatures between 15°C to 30°C',
+                attractions: [
+                    'Main Mausoleum',
+                    'Charbagh Garden',
+                    'Mosque and Guest House',
+                    'Agra Fort (nearby)',
+                    'Mehtab Bagh (Moonlight Garden)'
+                ]
+            },
+            'goa': {
+                title: 'Goa Beaches',
+                image: 'https://images.unsplash.com/photo-1588418073148-93dbe39bc504?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                location: 'Goa',
+                description: 'Goa is known for its stunning beaches, ranging from popular stretches at Baga and Palolem to isolated coves that are accessible only by boat or foot. The state also has a rich Portuguese heritage visible in its architecture and cuisine.',
+                budget: '₹8,000',
+                mid: '₹20,000',
+                luxury: '₹40,000+',
+                bestTime: 'November to February - Cool and dry weather perfect for beach activities',
+                attractions: [
+                    'Calangute and Baga Beaches',
+                    'Basilica of Bom Jesus',
+                    'Dudhsagar Waterfalls',
+                    'Anjuna Flea Market',
+                    'Fort Aguada'
+                ]
+            },
+            'kerala': {
+                title: 'Kerala Backwaters',
+                image: 'https://images.unsplash.com/photo-1558642084-fd07fae5282e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                location: 'Kerala',
+                description: 'The Kerala backwaters are a network of brackish lagoons and lakes lying parallel to the Arabian Sea coast. A cruise on the backwaters in traditional houseboats offers a serene experience of Kerala\'s rural life and natural beauty.',
+                budget: '₹7,000',
+                mid: '₹18,000',
+                luxury: '₹35,000+',
+                bestTime: 'September to March - Pleasant weather with less humidity',
+                attractions: [
+                    'Alleppey Houseboat Cruise',
+                    'Kumarakom Bird Sanctuary',
+                    'Vembanad Lake',
+                    'Cochin Fort',
+                    'Marari Beach'
+                ]
+            }
+        };
+
+        // Add click event to view details buttons
+        viewDetailsBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = this.closest('.destination-card');
+                const destination = card.getAttribute('data-destination');
+                
+                if (destinationData[destination]) {
+                    const data = destinationData[destination];
+                    
+                    document.getElementById('modal-title').textContent = data.title;
+                    document.getElementById('modal-image').src = data.image;
+                    document.getElementById('modal-image').alt = data.title;
+                    document.getElementById('modal-location').querySelector('span').textContent = data.location;
+                    document.getElementById('modal-description').textContent = data.description;
+                    document.getElementById('modal-best-time').textContent = data.bestTime;
+                    
+                    // Set expense
+                    const expenseHTML = `
+                        <span class="budget">Budget: ${data.budget}</span>
+                        <span class="mid-range">Mid: ${data.mid}</span>
+                        <span class="luxury">Luxury: ${data.luxury}</span>
+                    `;
+                    document.getElementById('modal-expense').innerHTML = expenseHTML;
+                    
+                    // Set attractions
+                    const attractionsList = document.getElementById('modal-attractions');
+                    attractionsList.innerHTML = '';
+                    data.attractions.forEach(attraction => {
+                        const li = document.createElement('li');
+                        li.textContent = attraction;
+                        attractionsList.appendChild(li);
+                    });
+                    
+                    // Show modal
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Newsletter Subscription
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.newsletter-form input').value;
+            if (email.trim() !== '') {
+                alert(`Thank you for subscribing with: ${email}`);
+                document.querySelector('.newsletter-form input').value = '';
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
